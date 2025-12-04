@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <!-- SEO básico -->
+  <title>Animais Extintos</title>
+  <meta name="description" content="Conheça animais marinhos extintos, curiosidades pré-históricas e por que cuidar dos oceanos hoje é tão importante." />
+
+  <!-- Bibliotecas -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.8.0/dist/tf.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header role="banner">
+    <div class="wrap">
+      <nav aria-label="Navegação principal">
+        <div class="brand" aria-label="Marca da página">
+          <span aria-hidden="true"></span>
+          <strong>Mar Profundo</strong>
+        </div>
+
+        <div class="nav-links" role="navigation">
+          <a href="#curiosidades">Curiosidades</a>
+          <a href="#fatos">Fatos</a>
+          <a href="#galeria">Galeria</a>
+          <a href="#faq">FAQ</a>
+        </div>
+
+        <div class="controls">
+          <button id="toggleTheme" class="btn ghost" aria-pressed="false" aria-label="Alternar modo claro e escuro">🌙</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="wrap" role="main">
+    <!-- HERO -->
+    <section class="hero fade-in" aria-labelledby="titulo-hero">
+      <div>
+        <!-- TODO: Substituir o TEMA_DO_PROJETO -->
+        <h1 id="titulo-hero">Animais Extintos</h1>
+        <!-- TODO: Substituir o SLOGAN_IMPACTANTE -->
+        <h2>Fatos e curiosidades interessantes sobre animais marinhos extintos.</h2>
+        <!-- TODO: Substituir o RESUMO_CURTO -->
+        <p>Fizemos este projeto sobre animais extintos para mostrar como os oceanos já foram diferentes e por que precisamos cuidar melhor do mar hoje.</p>
+
+        <div class="actions" role="group" aria-label="Ações principais">
+          <!-- Botão obrigatório: Reconhecimento Facial -->
+          <button id="abrirIA" class="btn" aria-label="Iniciar reconhecimento facial">
+            Reconhecimento Facial
+          </button>
+
+          <!-- Botão obrigatório: Abrir Chatbot (também no topo) -->
+        </div>
+      </div>
+      <div class="imgwrap" aria-hidden="false">
+        <!-- TODO: Substituir a URL_IMAGEM_HERO -->
+        <img src="https://s2-umsoplaneta.glbimg.com/AB5_4RM7g0FnsXan7dpX1pCOnfc=/0x0:800x600/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_7d5b9b5029304d27b7ef8a7f28b4d70f/internal_photos/bs/2021/K/Q/cS7GsCTMiT5LUEBFTReg/cavalo-marinho.jpg" alt="Cavalo-marinho nadando em um oceano limpo" />
+      </div>
+    </section>
+
+    <!-- NOVO: LINHA DO TEMPO DAS EXTINÇÕES -->
+    <section class="fade-in" aria-label="Linha do tempo das extinções marinhas">
+      <header>
+        <h2>Linha do tempo das extinções marinhas</h2>
+        <p>Veja em que épocas alguns desses animais viveram e desapareceram.</p>
+      </header>
+      <div class="cards" role="list">
+        <article class="card" role="listitem">
+          <h3>Período Devoniano</h3>
+          <p>
+            Chamado de “Era dos Peixes”. Foi nesse período que viveu o
+            <strong>Dunkleosteus</strong>, um dos maiores predadores marinhos antigos.
+          </p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Período Cretáceo</h3>
+          <p>
+            Última era dos dinossauros. <strong>Mosasaurus</strong> e <strong>Tylosaurus</strong> dominavam os mares
+            antes da grande extinção em massa há cerca de 66 milhões de anos.
+          </p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Era Cenozoica</h3>
+          <p>
+            Depois dos dinossauros, surgem outros grandes tubarões, como o
+            <strong>Carcharocles angustidens</strong>, ancestral do famoso Megalodon.
+          </p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Hoje</h3>
+          <p>
+            Muitas espécies marinhas não estão extintas, mas <strong>ameaçadas</strong>.
+            A poluição, a pesca predatória e o aquecimento global podem criar
+            novos animais “do passado” se não cuidarmos dos oceanos.
+          </p>
+        </article>
+      </div>
+    </section>
+    <!-- FIM NOVO -->
+
+    <!-- CURIOSIDADES -->
+    <section id="curiosidades" aria-labelledby="titulo-curiosidades" class="fade-in">
+      <header>
+        <h2 id="titulo-curiosidades">Curiosidades</h2>
+        <p>Descobertas rápidas sobre animais marinhos extintos.</p>
+      </header>
+
+      <!-- NOVO: ASIDE LATERAL COM FÓSSIL -->
+      <aside class="fade-in" aria-label="Destaque visual sobre fósseis marinhos">
+        <figure>
+          <img src="data:image/jpeg;base64,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" />
+          <figcaption>
+            Fósseis como o das amonites ajudam cientistas a descobrir como era a vida nos antigos mares.
+          </figcaption>
+        </figure>
+      </aside>
+      <!-- FIM NOVO -->
+
+      <ul class="facts-list" role="list">
+        <!-- TODO: Preencher de 3 a 5 curiosidades -->
+        <li>
+          <div class="text">
+            <strong>Mosasaurus</strong> – Réptil marinho enorme que dominava os mares durante o Cretáceo, com até 17 metros de comprimento.
+          </div>
+        </li>
+        <li>
+          <div class="text">
+            <strong>Dunkleosteus</strong> – Peixe pré-histórico do Devoniano com uma enorme mandíbula e placas ósseas afiadas, podendo chegar a 10 metros.
+          </div>
+        </li>
+        <li>
+          <div class="text">
+            <strong>Hallucigenia</strong> – Pequeno e estranho animal do Câmbrico, com espinhos e patas finas, que habitava o fundo do mar.
+          </div>
+        </li>
+        <li>
+          <div class="text">
+            <strong>Tylosaurus</strong> – Réptil marinho do Cretáceo parecido com o Mosasaurus, com corpo alongado e perfeito para nadar e caçar.
+          </div>
+        </li>
+        <li>
+          <div class="text">
+            <strong>Carcharocles angustidens</strong> – Tubarão pré-histórico que viveu entre 20 e 5 milhões de anos atrás, considerado ancestral do Megalodon.
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- FATOS/CIÊNCIA -->
+    <section id="fatos" aria-labelledby="titulo-fatos" class="fade-in">
+      <header>
+        <h2 id="titulo-fatos">Fatos e Ciência</h2>
+        <p>Três pontos científicos para entender melhor.</p>
+      </header>
+      <div class="cards" role="list">
+        <!-- TODO: Preencher os cards com fatos -->
+        <article class="card" aria-label="Fato científico 1" role="listitem">
+          <h3>Mosasaurus</h3>
+          <p>
+            Réptil marinho do Cretáceo, com até 17 m de comprimento.
+            Era um dos principais predadores dos mares, com dentes afiados
+            e mordida muito forte. Não era um dinossauro, mas sim um réptil marinho.
+          </p>
+        </article>
+
+        <article class="card" aria-label="Fato científico 2" role="listitem">
+          <h3>Dunkleosteus</h3>
+          <p>
+            Peixe do Devoniano, com até 10 m de comprimento.
+            Tinha uma “armadura” óssea na cabeça e uma mandíbula muito poderosa,
+            capaz de quebrar até conchas duras e outros animais com carapaça.
+          </p>
+        </article>
+
+        <article class="card" aria-label="Fato científico 3" role="listitem">
+          <h3>Hallucigenia</h3>
+          <p>
+            Pequeno animal do Câmbrico, com 3–4 cm de comprimento.
+            Possuía espinhos nas costas e pernas finas, com um corpo tão estranho
+            que os cientistas demoraram anos para entender qual lado era “para cima”.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section id="galeria" aria-labelledby="titulo-galeria" class="fade-in">
+      <header>
+        <h2 id="titulo-galeria">Galeria</h2>
+        <p>Imagens relacionadas ao tema com pequenas legendas.</p>
+      </header>
+
+      <div class="gallery" role="list">
+        <!-- TODO: Adicionar de 3 a 6 imagens na galeria. Duplique/remova figuras conforme necessário. -->
+        <figure role="listitem">
+          <img src="https://www.fatosdesconhecidos.com.br/wp-content/uploads/2019/11/8-3.jpg" alt="Ilustração de Mosasaurus nadando" />
+          <figcaption>Mosasaurus – um dos maiores répteis marinhos do Cretáceo.</figcaption>
+        </figure>
+        <figure role="listitem">
+          <img src="https://aventurasnahistoria.com.br/wp-content/uploads/arqueologia/peixe_monstro_360_2.jpg" alt="Reconstrução de peixe pré-histórico gigante" />
+          <figcaption>Dunkleosteus – um “peixe monstro” blindado do Devoniano.</figcaption>
+        </figure>
+        <figure role="listitem">
+          <img src="https://conexaoplaneta.com.br/wp-content/uploads/2017/04/peixe-boi-nao-esta-mais-em-risco-extincao-foto-extrabrandt-pixabay-800.jpg" alt="Peixe-boi nadando em água tranquila" />
+          <figcaption>Peixe-boi – espécie que já esteve em risco e ainda precisa de proteção.</figcaption>
+        </figure>
+        <figure role="listitem">
+          <img src="https://static.nationalgeographicbrasil.com/files/styles/image_3200/public/usfws-emperor-penguins.webp?w=1600&h=900" alt="Grupo de pinguins-imperadores no gelo" />
+          <figcaption>Pinguins-imperadores – afetados pelo derretimento do gelo e mudanças climáticas.</figcaption>
+        </figure>
+        <figure role="listitem">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Manta_birostris-Thailand4.jpg/250px-Manta_birostris-Thailand4.jpg" alt="Raia-manta nadando em mar azul" />
+          <figcaption>Raia-manta – gigante dos mares que enfrenta ameaça de pesca e poluição.</figcaption>
+        </figure>
+        <figure role="listitem">
+          <img src="https://www.ambientemagazine.com/wp-content/uploads/2015/11/BALEIA2.jpg" alt="Orca saltando na superfície do oceano" />
+          <figcaption>Orca – topo da cadeia alimentar, sensível a impactos humanos nos oceanos.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" aria-labelledby="titulo-faq" class="fade-in">
+      <header>
+        <h2 id="titulo-faq">Perguntas Frequentes</h2>
+        <p>Respostas rápidas sobre o projeto e o tema.</p>
+      </header>
+
+      <div class="faq">
+        <!-- TODO: Ajustar perguntas/respostas conforme o tema -->
+        <details>
+          <summary>O Mosasaurus era um dinossauro?</summary>
+          <p>Não. Ele não era um dinossauro, e sim um réptil marinho gigante que viveu na mesma época de muitos dinossauros.</p>
+        </details>
+        <details>
+          <summary>Qual desses animais era o mais perigoso?</summary>
+          <p>O Mosasaurus provavelmente era um dos mais perigosos, pelo seu tamanho, força e habilidades de caça nos mares do Cretáceo.</p>
+        </details>
+        <details>
+          <summary>O Hallucigenia era realmente um animal ou uma ilusão fóssil?</summary>
+          <p>O Hallucigenia era um animal real. No começo, os fósseis confundiram os cientistas, mas hoje se sabe que ele viveu no fundo do mar no período Câmbrico.</p>
+        </details>
+        <details>
+          <summary>O Carcharocles angustidens é o mesmo que o Megalodon?</summary>
+          <p>Não. Eles não são a mesma espécie, mas são parentes próximos na linhagem dos grandes tubarões “megatooth”.</p>
+        </details>
+        <details>
+          <summary>Esses animais viveram todos na mesma época?</summary>
+          <p>Não. Eles viveram em períodos diferentes da história da Terra, separados por milhões de anos.</p>
+        </details>
+      </div>
+    </section>
+        <section>
+      <!-- NOVO: CARD DE CONEXÃO COM O PRESENTE -->
+      <div class="card" aria-label="Conexão entre animais extintos e conservação atual">
+        <h3>Por que estudar animais extintos?</h3>
+        <p>
+          Conhecer esses animais antigos ajuda a entender como o planeta mudou
+          e mostra que espécies podem desaparecer para sempre. Isso reforça a
+          importância de proteger os animais marinhos que ainda existem hoje,
+          para que não virem apenas imagens em livros e fósseis no futuro.
+        </p>
+      </div>
+      <!-- FIM NOVO -->
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="cta-final" aria-labelledby="titulo-cta" class="fade-in">
+      <header>
+        <h2 id="titulo-cta">Continue explorando</h2>
+        <p>Escolha um caminho para aprender ainda mais.</p>
+      </header>
+      <div class="cta" role="group" aria-label="Call to Action">
+        <a href="#fatos">Aprender mais</a>
+        <a href="#galeria">Ver imagens</a>
+        <a href="#creditos">Baixar material &amp; Fontes</a>
+      </div>
+    </section>
+
+    <!-- CRÉDITOS/FONTES -->
+    <section id="creditos" aria-labelledby="titulo-creditos" class="fade-in">
+      <header>
+        <h2 id="titulo-creditos">Créditos e Fontes</h2>
+        <p>Referências utilizadas neste projeto.</p>
+      </header>
+      <!-- TODO: Inserir links ou nomes das fontes -->
+      <article>
+        <p>Núcleos WIT</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Painel do Chatbot (Aside fixo) -->
+  <aside id="chatPane" role="complementary" aria-label="Painel do chatbot" aria-hidden="true">
+    <div class="chat-header">
+      <strong>Chatbot Demonstrativo</strong>
+      <div>
+        <button id="closeChat" class="icon-btn" aria-label="Fechar chatbot">✖</button>
+      </div>
+    </div>
+    <div class="chat-body" id="chatHistory" aria-live="polite">
+      <!-- Placeholders de histórico -->
+      <div class="msg bot">Olá! Sou um protótipo de chatbot. Como posso ajudar sobre [[TEMA_DO_PROJETO]]?</div>
+      <div class="msg user">Quero saber curiosidades rápidas.</div>
+      <div class="msg bot">Veja a seção “Curiosidades” ou pergunte algo específico!</div>
+    </div>
+    <form class="chat-input" id="chatForm" aria-label="Entrada de mensagem do chatbot">
+      <input id="chatText" type="text" name="q" placeholder="Digite sua mensagem..." aria-label="Escreva sua mensagem" />
+      <button class="icon-btn" type="submit" aria-label="Enviar mensagem">➤</button>
+    </form>
+  </aside>
+
+  <footer class="wrap" role="contentinfo">
+    <p>&copy; <span id="ano"></span> | Projeto: Animais extintos maritimos — <a href="#topo" id="backToTop">Voltar ao topo</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
+  <df-messenger
+    intent="WELCOME"
+    chat-title="ECOBOT"
+    agent-id="6c106d6c-eef7-41db-92b4-5bf82848937e"
+    language-code="pt-br">
+  </df-messenger>
+
+  <!-- Modal da câmera -->
+  <div id="cameraModal" class="modal" aria-hidden="true" style="display:none;">
+    <div class="modal-content">
+      <button id="fecharModal" class="botao-fechar" title="Fechar">❌</button>
+      <h2 class="modal-title">Reconhecimento Facial</h2>
+      <div class="video-wrap">
+        <video id="video" autoplay muted playsinline></video>
+      </div>
+      <div class="controls">
+        <button id="tirarFoto" class="botao-foto" title="Tirar foto">📸</button>
+      </div>
+      <p id="modalStatus" class="modal-status">Aguardando...</p>
+      <canvas id="fotoCanvas" style="display:none;"></canvas>
+    </div>
+  </div>
+
+</body>
+</html>
